@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      sign_in @user
       flash[:success] = "Seja Bem Vindo ao Software de Gestao de Agenda!"
       redirect_to @user
     else
