@@ -1,0 +1,25 @@
+<% provide(:title, 'Cadastre sua Empresa') %>
+<h1>Cadastre sua Empresa</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@empresa) do |f| %>
+
+	  <%= render 'error_messages'%>
+
+      <%= f.label :razao_social %>
+      <%= f.text_field :razao_social %>
+
+	  <%= f.label :cnpj %>
+      <%= f.text_field :cnpj %>	
+
+	  <%= f.label :email %>
+      <%= f.text_field :email %>	
+
+      <%= f.label :data_abertura, 'Data de Abertura' %>
+      <%= f.text_field :data_abertura %>
+
+      <%= f.submit "Criar conta", class: "btn btn-large btn-primary"%>
+    <% end %>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   
+  belongs_to :Funcionarios
+  
   has_secure_password
   
   before_save { email.downcase! }
