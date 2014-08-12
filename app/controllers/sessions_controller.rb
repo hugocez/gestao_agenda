@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   
+  before_action :verifica_sessao, only: :new
+  
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user 
@@ -20,5 +22,13 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
+  
+  private
+  
+    def verifica_sessao
+      if signed_in?
+        redirect_to users_path
+      end
+    end
   
 end
