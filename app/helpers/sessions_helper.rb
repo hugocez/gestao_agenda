@@ -45,6 +45,11 @@ module SessionsHelper
     redirect_to(root_url) unless current_user.admin?
   end
 
+  def encontrar_empresa
+    user = current_user
+    func = user.funcionario.empresa
+    func.id
+  end
 
   
 end

@@ -1,0 +1,17 @@
+<%= will_paginate %>
+
+		<tr>
+		  	<td>
+		  		<%if funcionario.cpf? %>
+		  			<%= link_to funcionario.cpf, funcionario %>
+		  		<%end%>	
+		  	</td>
+	  		<td><%= link_to funcionario.nome, funcionario %></td>
+  			<td><%= link_to funcionario.user.id, funcionario %></td>
+  			<td>		<%= link_to "delete", funcionario, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+        	</td>
+		</tr>
+
+
+<%= will_paginate %>

@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'funcionarios/new'
-
-  get 'funcionarios/show'
-
-  get 'funcionarios/edit'
+  resources :funcionarios
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]

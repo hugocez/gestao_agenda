@@ -20,8 +20,8 @@ class EmpresasController < ApplicationController
 
       if @empresa.save
         p = "123456"
-        user = User.create(name: params[:empresa][:razao_social], email: params[:empresa][:email], password: p, password_confirmation: p)
-        func = Funcionario.create(nome: "ADMINISTRADOR", empresa_id: @empresa.id, user_id: user.id)
+        func = Funcionario.create(nome: "ADMINISTRADOR", empresa_id: @empresa.id)
+        user = User.create(name: params[:empresa][:razao_social], email: params[:empresa][:email], password: p, password_confirmation: p,funcionario_id: func.id)
         sign_in user
         flash[:success] = "Seja Bem Vindo ao Sistema Exemplo!"
         redirect_to @empresa

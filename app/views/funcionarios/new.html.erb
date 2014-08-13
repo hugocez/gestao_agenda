@@ -1,2 +1,21 @@
-<h1>Funcionarios#new</h1>
-<p>Find me in app/views/funcionarios/new.html.erb</p>
+<% provide(:title, "Entrar") %>
+<h1>Entrar</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(:funcionario, url: funcionarios_path) do |f| %>
+
+      <%= f.label :nome %>
+      <%= f.text_field :nome %>
+
+	  <%= f.label :cpf %>
+      <%= f.text_field :cpf %>
+      
+      <%= f.label :data_nasc %>
+      <%= f.text_field :data_nasc %>
+      
+      <%= f.submit "Cadastrar Funcionario", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

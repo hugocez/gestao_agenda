@@ -1,0 +1,19 @@
+<% provide(:title, 'Lista de Funcionarios') %>
+<h1>Lista de funcionarios</h1>
+
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>CPF</th>
+			<th>Nome</th>
+			<th>Usuario</th>
+			<th>Deletar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= render @funcionarios %>
+	</tbody>
+</table>
+
+<p><%= link_to 'Novo Funcionario', new_funcionario_path %></p>

@@ -23,7 +23,9 @@ class UsersController < ApplicationController
   end
   
   def index
-    @user = User.all
+    #@users = User.all.paginate(page: params[:page]) - Forma antiga - sem filtrar a empresa
+    eid = encontrar_empresa
+    @users = User.joins(:funcionario).where(["funcionarios.empresa_id = ?", eid]).paginate(page: params[:page])
   end
 
 
@@ -42,4 +44,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user) 
     end
+    
+    
 end  

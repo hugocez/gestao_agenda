@@ -1,6 +1,6 @@
 class Funcionario < ActiveRecord::Base
   
-  belongs_to :Empresas
-  has_one :Users
+  belongs_to :empresa
+  has_one :user
   
 end

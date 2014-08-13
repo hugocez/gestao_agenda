@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  belongs_to :Funcionarios
+  belongs_to :funcionario
   
   has_secure_password
   

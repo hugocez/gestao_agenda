@@ -1,0 +1,18 @@
+<% provide(:title, 'Lista de Usuarios') %>
+<h1>Lista de Usuarios</h1>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nome</th>
+			<th>E-Mail</th>
+			<th>Deletar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= render @users %>
+	</tbody>
+</table>
+
+<p><%= link_to 'Novo Usuario', new_user_path %></p>
