@@ -7,10 +7,13 @@ class FuncionariosController < ApplicationController
   end
 
   def create
-    @funcionario = Funcionario.new(user_params)
+    @funcionario = Funcionario.new(funcionario_params)
+    @funcionario.empresa_id = encontrar_empresa
     if @funcionario.save
+      p = "123456"
+      user = User.create(name: params[:funcionario][:nome], email:"seuemail@email.com", password: p, password_confirmation: p, funcionario_id: @funcionario.id)
       flash[:success] = "Funcionario Cadastrado Com Sucesso!"
-      redirect_to @funcionario
+      redirect_to edit_user_path(user)
     else
       render 'new'
     end
@@ -34,12 +37,14 @@ class FuncionariosController < ApplicationController
   
   private
 
-    def user_params
-      params.require(:funcionario).permit(:nome, :cpf, :data_nasc)
+    def funcionario_params
+      params.require(:funcionario).permit(:nome, :cpf, :data_nasc, :email)
     end
     
     def signed_in_user
       redirect_to signin_url, notice: "Por favor, faca o login." unless signed_in?
     end
+    
+    
   
 end

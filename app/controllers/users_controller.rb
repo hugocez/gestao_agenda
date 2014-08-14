@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update, :show, :destroy]
   before_action :correct_user, only: [:edit, :update]
   
-  def new
+  def new 
     @user = User.new
   end
   
@@ -28,6 +28,9 @@ class UsersController < ApplicationController
     @users = User.joins(:funcionario).where(["funcionarios.empresa_id = ?", eid]).paginate(page: params[:page])
   end
 
+  def edit
+    
+  end
 
   private
 
