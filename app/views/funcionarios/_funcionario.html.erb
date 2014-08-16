@@ -10,7 +10,7 @@
   			<td><% if funcionario.user != nil %> 
   					<%= link_to funcionario.user.email, user_path(funcionario.user.id) %>
   				<%else%>
-  					<%= link_to "Cadastrar", new_user_path %>
+  					<%= link_to "Cadastrar", edit_funcionario_path(funcionario.id) %>
   				<%end%>
   			</td>
   			<td>		<%= link_to "delete", funcionario, method: :delete,
