@@ -1,0 +1,12 @@
+<%= will_paginate %>
+	<tr>
+	  	<td>
+	  		<%= link_to empresa_loja.id, empresa_loja %>	
+	  	</td>
+  		<td><%= link_to empresa_loja.nome, empresa_loja %></td>
+		<td><%= link_to empresa_loja.logradouro, empresa_loja %></td>
+		<td>		<%= link_to "delete", empresa_loja, method: :delete,
+                        data: { confirm: "You sure?" } %>
+       	</td>
+	</tr>
+<%= will_paginate %>

@@ -1,2 +1,18 @@
-<h1>EmpresaLojas#index</h1>
-<p>Find me in app/views/empresa_lojas/index.html.erb</p>
+<% provide(:title, 'Lista de Lojas') %>
+<h1>Lista de Lojas</h1>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nome</th>
+			<th>Logradouro</th>
+			<th>Deletar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= render @empresa_lojas %>
+	</tbody>
+</table>
+
+<p><%= link_to 'Nova Loja', new_empresa_loja_path %></p>
