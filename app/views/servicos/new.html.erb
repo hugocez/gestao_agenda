@@ -1,0 +1,19 @@
+<% provide(:title, 'Cadastro de Servicos') %>
+<h1>Cadastro de Servicos</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@servico) do |f| %>
+
+	  <%= render 'error_messages'%>
+
+      <%= f.label :descricao %>
+      <%= f.text_field :descricao %>
+      
+      <%= f.label :tipo_servico_id, "Tipo de Servico" %>
+      <%= collection_select(:servico, :tipo_servico_id, TipoServico.all, :id, :descricao) %>
+
+      <%= f.submit "Confirmar", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

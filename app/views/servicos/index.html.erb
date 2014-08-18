@@ -1,0 +1,18 @@
+<% provide(:title, 'Lista de Servicos') %>
+<h1>Lista de Servicos</h1>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Descricao</th>
+			<th>Tipo</th>
+			<th>Deletar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= render @servicos %>
+	</tbody>
+</table>
+
+<p><%= link_to 'Novo Servico', new_servico_path %></p>

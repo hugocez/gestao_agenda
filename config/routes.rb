@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   resources :funcionarios
-
+  resources :servicos
+  resources :tipo_servicos
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :empresas

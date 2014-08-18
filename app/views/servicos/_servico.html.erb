@@ -1,0 +1,12 @@
+<%= will_paginate %>
+	<tr>
+	  	<td>
+	  		<%= link_to servico.id, servico %>	
+	  	</td>
+  		<td><%= link_to servico.descricao, servico %></td>
+		<td><%= link_to servico.tipo_servico.descricao, tipo_servico_path(servico.tipo_servico.id) %></td>
+		<td>		<%= link_to "delete", servico, method: :delete,
+                        data: { confirm: "You sure?" } %>
+       	</td>
+	</tr>
+<%= will_paginate %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813205109) do
+ActiveRecord::Schema.define(version: 20140817211042) do
 
   create_table "empresas", force: true do |t|
     t.string   "razao_social"
@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(version: 20140813205109) do
     t.string   "cpf"
     t.date     "data_nasc"
     t.integer  "empresa_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "servicos", force: true do |t|
+    t.string   "descricao"
+    t.integer  "tipo_servico_id"
+    t.integer  "empresa_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tipo_servicos", force: true do |t|
+    t.string   "descricao"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

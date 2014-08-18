@@ -13,7 +13,7 @@ class FuncionariosController < ApplicationController
       #p = "123456"
       #user = User.create(name: params[:funcionario][:nome], email:"seuemail@email.com", password: p, password_confirmation: p, funcionario_id: @funcionario.id)
       flash[:success] = "Funcionario Cadastrado Com Sucesso!"
-      redirect_to funcionario_path
+      redirect_to funcionarios_path
     else
       render 'new'
     end
@@ -32,8 +32,24 @@ class FuncionariosController < ApplicationController
     end
   end
 
-  def delete
-    
+  def destroy
+    @funcionario = Funcionario.find(params[:id])
+    user = current_user
+    if @funcionario.user
+      if user.id = @funcionario.user.id
+        flash[:warning] = "Voce nao pode excluir o funcionario atrelado ao seu usuario"
+      else
+        @funcionario.user.destroy
+        if @funcionario.destroy
+          flash[:success] = "Cadastro Atualizado!"
+        end
+      end
+    else
+      if @funcionario.destroy
+          flash[:success] = "Funcionario Excluido com Sucesso!"
+      end
+    end
+    redirect_to funcionarios_path
   end
 
   def show

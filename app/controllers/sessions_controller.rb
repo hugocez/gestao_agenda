@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
   
     def verifica_sessao
       if signed_in?
-        redirect_to users_path
+        redirect_to user_path current_user
       end
     end
   
