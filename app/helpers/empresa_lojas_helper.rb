@@ -1,0 +1,2 @@
+module EmpresaLojasHelper
+end

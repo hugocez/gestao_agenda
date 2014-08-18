@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :empresa_lojas
   resources :funcionarios
   resources :servicos
   resources :tipo_servicos
