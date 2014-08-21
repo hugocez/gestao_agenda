@@ -14,6 +14,9 @@
       <%= f.label :data_nasc %>
       <%= f.text_field :data_nasc %>
       
+      <%= f.label :empresa_loja_id, "Selecione a Loja" %>
+      <%= collection_select(:funcionario, :empresa_loja_id, EmpresaLoja.where(["empresa_id = ?", @funcionario.empresa_id]), :id, :nome) %>
+      
       <%= fields_for :user, @funcionario.user do |users_form| %>
 		<%= users_form.label :email%>
 		<%= users_form.text_field :email %>

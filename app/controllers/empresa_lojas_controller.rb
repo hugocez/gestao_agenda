@@ -8,7 +8,7 @@ class EmpresaLojasController < ApplicationController
 
   def create
     @empresaloja = EmpresaLoja.new(loja_params)
-    @empresaloja.id = encontrar_empresa
+    @empresaloja.empresa_id = encontrar_empresa
     
     if @empresaloja.save
       flash[:success] = "Loja cadastrada com sucesso!"

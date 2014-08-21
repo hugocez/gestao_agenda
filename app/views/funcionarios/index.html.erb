@@ -2,7 +2,9 @@
 <h1>Lista de funcionarios</h1>
 
 
-<table class="table table-bordered">
+<center><%= will_paginate%></center>
+
+<table class="table table-striped table-bordered">
 	<thead>
 		<tr>
 			<th>CPF</th>
@@ -12,8 +14,12 @@
 		</tr>
 	</thead>
 	<tbody>
+		
 		<%= render @funcionarios %>
+		
 	</tbody>
 </table>
+
+<center><%= will_paginate%></center>
 
 <p><%= link_to 'Novo Funcionario', new_funcionario_path %></p>

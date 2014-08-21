@@ -1,2 +1,24 @@
-<h1>Funcionarios#show</h1>
-<p>Find me in app/views/funcionarios/show.html.erb</p>
+<% provide(:title, "Mostrar Funcionario: " + @funcionario.nome) %>
+<h1><%=@funcionario.nome%></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@funcionario) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+	  <%= f.label :cpf %>
+      <%= f.text_field :cpf, :disabled => 'disabled' %>
+      
+      <%= f.label :data_nasc, 'Data de Nascimento' %>
+      <%= f.text_field :data_nasc, :disabled => 'disabled' %>
+      
+      <%if current_user.funcionario.empresa_loja_id == nil%>
+      	<%= f.label :empresa_loja_id, "Loja" %>
+      	<%= f.text_field :funcionario, :value => @funcionario.empresa_loja.nome, :disabled => 'disabled' %>
+      <%end%>
+      
+    <% end %>
+
+  </div>
+</div>

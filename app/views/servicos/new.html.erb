@@ -12,6 +12,14 @@
       
       <%= f.label :tipo_servico_id, "Tipo de Servico" %>
       <%= collection_select(:servico, :tipo_servico_id, TipoServico.all, :id, :descricao) %>
+      
+      <%user = current_user%>
+      <%if user.funcionario.empresa_loja_id == nil %>
+      	<%= f.label :empresa_loja_id, "Selecione a Loja" %>
+      	<%= collection_select(:servico, :empresa_loja_id, EmpresaLoja.where(["empresa_id = ?", user.funcionario.empresa_id]), :id, :nome) %>
+      <%else%>
+      	<%= f.hidden_field :empresa_loja_id, :value => user.funcionario.empresa_loja_id %>
+      <%end%>
 
       <%= f.submit "Confirmar", class: "btn btn-large btn-primary" %>
     <% end %>

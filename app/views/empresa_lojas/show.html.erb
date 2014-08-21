@@ -1,2 +1,9 @@
-<h1>EmpresaLojas#show</h1>
-<p>Find me in app/views/empresa_lojas/show.html.erb</p>
+<% provide(:title, "Mostrar Loja: " + @empresaloja.nome) %>
+<h1><%=@empresaloja.nome%></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <h2><b>Endereco:</b> <%=@empresaloja.logradouro%>, <%=@empresaloja.nro_logradouro%> - <%=@empresaloja.cidade%> - <%=@empresaloja.uf%></h2>
+  </div>
+</div>
+<p><%= link_to 'Funcionarios', controller:"funcionarios", action:"index", empresa_loja_id: @empresaloja.id %></p>

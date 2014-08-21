@@ -10,8 +10,6 @@ class FuncionariosController < ApplicationController
     @funcionario = Funcionario.new(funcionario_params)
     @funcionario.empresa_id = encontrar_empresa
     if @funcionario.save
-      #p = "123456"
-      #user = User.create(name: params[:funcionario][:nome], email:"seuemail@email.com", password: p, password_confirmation: p, funcionario_id: @funcionario.id)
       flash[:success] = "Funcionario Cadastrado Com Sucesso!"
       redirect_to funcionarios_path
     else
@@ -21,12 +19,16 @@ class FuncionariosController < ApplicationController
   
   def update
     @funcionario = Funcionario.find(params[:id])
-    u = User.new(usuario_params)
-    u.name = params[:funcionario][:nome]
-    if @funcionario.update_attributes(funcionario_params)
+    
+    if @funcionario.user == nil
+      u = User.new(usuario_params)
+      u.name = params[:funcionario][:nome]
       @funcionario.user = u
+    end  
+      
+    if @funcionario.update_attributes(funcionario_params)
       flash[:success] = "Cadastro Atualizado!"
-      redirect_to @funcionario
+      redirect_to funcionarios_path
     else
       render 'edit'
     end
@@ -60,15 +62,26 @@ class FuncionariosController < ApplicationController
     @funcionario = Funcionario.find(params[:id])
   end
   
-  def index
-    empresa_id = encontrar_empresa
-    @funcionarios = Funcionario.where(["empresa_id = ?", empresa_id]).paginate(page: params[:page])
+  def index 
+    
+    if params[:empresa_loja_id] != nil
+      @funcionarios = Funcionario.where(["empresa_loja_id = ?", params[:empresa_loja_id]]).paginate(page: params[:page])
+    else
+      user = current_user
+      if user.funcionario.empresa_loja_id == nil
+        empresa_id = encontrar_empresa
+        @funcionarios = Funcionario.where(["empresa_id = ?", empresa_id]).paginate(page: params[:page])
+      else
+        @funcionarios = Funcionario.where(["empresa_loja_id = ?", user.funcionario.empresa_loja_id]).paginate(page: params[:page])
+      end
+    end 
+    
   end
   
   private
 
     def funcionario_params
-      params.require(:funcionario).permit(:nome, :cpf, :data_nasc,:email,:password,:password_confirmation)
+      params.require(:funcionario).permit(:nome, :cpf, :data_nasc,:empresa_loja_id)
     end
     
     def usuario_params

@@ -18,8 +18,13 @@ class ServicosController < ApplicationController
   end
 
   def index
-    empresa_id = encontrar_empresa
-    @servicos = Servico.where(["empresa_id = ?", empresa_id]).paginate(page: params[:page])
+    user = current_user
+    if user.funcionario.empresa_loja_id == nil
+      empresa_id = encontrar_empresa
+      @servicos = Servico.where(["empresa_id = ?", empresa_id]).paginate(page: params[:page])
+    else
+      @servicos = Servico.where(["empresa_loja_id = ?", user.funcionario.empresa_loja_id]).paginate(page: params[:page])
+    end
   end
 
   def show
@@ -32,7 +37,7 @@ class ServicosController < ApplicationController
   private
     
     def servico_params
-      params.require(:servico).permit(:descricao,:tipo_servico_id)
+      params.require(:servico).permit(:descricao,:tipo_servico_id,:empresa_loja_id)
     end
     
     def signed_in_user
