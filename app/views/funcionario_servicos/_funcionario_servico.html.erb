@@ -1,0 +1,10 @@
+<tr>
+	  	<td><%= link_to funcionario_servico.id, funcionario_servico %></td>
+  		<td><%= link_to funcionario_servico.servico.descricao, funcionario_servico %></td>
+  		<td><%= link_to funcionario_servico.valor_base, funcionario_servico %></td>
+  		<td><%= link_to funcionario_servico.perc_comissao, funcionario_servico %></td>
+		<td><%= link_to "delete", funcionario_servico, method: :delete,
+                data: { confirm: "You sure?" } %>
+      	</td>
+</tr>
+

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :funcionario_servicos
   resources :empresa_lojas
   resources :funcionarios
   resources :servicos

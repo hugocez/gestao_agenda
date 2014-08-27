@@ -1,0 +1,25 @@
+<% provide(:title, @funcionarioServico.funcionario.nome + " - Servico") %>
+<h1><%=@funcionarioServico.funcionario.nome + " - Servico"%></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@funcionarioServico) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+      <%= f.label :servico_id, "Selecione o servico" %>
+      <%= collection_select(:funcionario_servico, :servico_id, Servico.where(["empresa_id = ?", @funcionarioServico.funcionario.empresa_id]), :id, :descricao) %>
+
+	  <%= f.label :valor_base, "Valor Cobrado" %>
+      <%= f.text_field :valor_base %>
+      
+      <%= f.label :perc_comissao, 'Percentual Comissao' %>
+      <%= f.text_field :perc_comissao %>
+      
+      <%= f.hidden_field :funcionario_id, :value => @funcionarioServico.funcionario_id %>
+      
+      <%= f.submit "Cadastrar Servico", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

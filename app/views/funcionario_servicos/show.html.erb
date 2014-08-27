@@ -1,0 +1,23 @@
+<% provide(:title, @funcionarioServico.funcionario.nome + " - Servico") %>
+<h1><%=@funcionarioServico.funcionario.nome + " - " + @funcionarioServico.servico.descricao%></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@funcionarioServico) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+	  <%= f.label :valor_base, "Valor Base:" %>
+      <%= f.text_field :valor_base, :disabled => 'disabled' %>
+      
+      <%= f.label :perc_comissao, 'Percentual Comissao:' %>
+      <%= f.text_field :perc_comissao, :disabled => 'disabled' %>
+      
+      <%= f.hidden_field :funcionario_id, :value => @funcionarioServico.funcionario_id %>
+      
+    <% end %>
+
+  </div>
+</div>
+
+<p><%=link_to 'Incluir Faixas', "#"%></p>
