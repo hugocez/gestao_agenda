@@ -1,2 +1,31 @@
-<h1>FaixaFuncionarioServicos#edit</h1>
-<p>Find me in app/views/faixa_funcionario_servicos/edit.html.erb</p>
+<% provide(:title, @faixaFuncionarioServico.funcionario_servico.funcionario.nome + " - Servico") %>
+<h1><%=@faixaFuncionarioServico.funcionario_servico.funcionario.nome + " - " + @faixaFuncionarioServico.funcionario_servico.servico.descricao%></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@faixaFuncionarioServico) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+      <%= f.label :dia_semana, "Dias da Semana" %>
+      <%= f.select :dia_semana, [['Todos',0],['Domingo',1],['Segunda',2],['Terca',3],['Quarta',4],['Quinta',5],['Sexta',6],['Sabado',7]] %>
+
+	  <%= f.label :hr_inicio, "Hora Inicio" %>
+      <%= f.text_field :hr_inicio %>
+      
+      <%= f.label :hr_fim, "Hora Fim" %>
+      <%= f.text_field :hr_fim %>
+      
+      <%= f.label :valor_base, "Valor Base" %>
+      <%= f.text_field :valor_base %>
+      
+      <%= f.label :duracao, "Duracao (min)" %>
+      <%= f.select :duracao, [['15',15],['30',30],['45',45],['60',60],['90',90],['120',120]] %>
+      
+      <%= f.hidden_field :funcionario_servico_id, :value => @faixaFuncionarioServico.funcionario_servico_id %>
+      
+      <%= f.submit "Atualizar Faixa Servico", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

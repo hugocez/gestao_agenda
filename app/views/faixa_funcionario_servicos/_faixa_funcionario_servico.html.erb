@@ -1,0 +1,11 @@
+<tr>
+	  	<td><%= link_to faixa_funcionario_servico.escreve_dia_semana(faixa_funcionario_servico.dia_semana), faixa_funcionario_servico %></td>
+  		<td><%= link_to faixa_funcionario_servico.hr_inicio, faixa_funcionario_servico %></td>
+  		<td><%= link_to faixa_funcionario_servico.hr_fim, faixa_funcionario_servico %></td>
+  		<td><%= link_to faixa_funcionario_servico.valor_base, faixa_funcionario_servico %></td>
+		<td><%= link_to faixa_funcionario_servico.duracao, faixa_funcionario_servico %></td>
+		<td><%= link_to "delete", faixa_funcionario_servico, method: :delete,
+                data: { confirm: "You sure?" } %>
+      	</td>
+</tr>
+

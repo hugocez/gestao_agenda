@@ -1,2 +1,32 @@
-<h1>FaixaFuncionarioServicos#show</h1>
-<p>Find me in app/views/faixa_funcionario_servicos/show.html.erb</p>
+<% provide(:title, @faixaFuncionarioServico.funcionario_servico.funcionario.nome + " - Servico") %>
+<h1><%=@faixaFuncionarioServico.funcionario_servico.funcionario.nome + " - " + @faixaFuncionarioServico.funcionario_servico.servico.descricao%></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@faixaFuncionarioServico) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+      <%= f.label :dia_semana, "Dias da Semana" %>
+      <%= f.text_field :dia_semana, :value=> @faixaFuncionarioServico.escreve_dia_semana(@faixaFuncionarioServico.dia_semana), :disabled => 'disabled'%>
+
+	  <%= f.label :hr_inicio, "Hora Inicio" %>
+      <%= f.text_field :hr_inicio, :disabled => 'disabled' %>
+      
+      <%= f.label :hr_fim, "Hora Fim" %>
+      <%= f.text_field :hr_fim, :disabled => 'disabled' %>
+      
+      <%= f.label :valor_base, "Valor Base" %>
+      <%= f.text_field :valor_base, :disabled => 'disabled' %>
+      
+      <%= f.label :duracao, "Duracao (min)" %>
+      <%= f.text_field :duracao, :disabled => 'disabled' %>
+      
+      <%= f.hidden_field :funcionario_servico_id, :value => @faixaFuncionarioServico.funcionario_servico_id %>
+
+    <% end %>
+
+  </div>
+</div>
+
+<p><%= link_to 'Atualizar', edit_faixa_funcionario_servico_path %> </p>
