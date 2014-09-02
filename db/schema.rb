@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827130246) do
+ActiveRecord::Schema.define(version: 20140831195532) do
 
   create_table "empresa_lojas", force: true do |t|
     t.string   "nome"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20140827130246) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "faixa_funcionario_servicos", ["dia_semana", "hr_inicio", "valor_base"], name: "index_faixa_func_on_dia_semn_and_hr_inic_and_valor", unique: true
 
   create_table "funcionario_empresa_lojas", force: true do |t|
     t.integer  "empresa_loja_id"
