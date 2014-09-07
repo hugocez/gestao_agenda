@@ -1,0 +1,84 @@
+<h1 class="page-header">
+
+    Agenda
+
+</h1>
+
+<div class="row placeholders">
+
+    <div class="col-xs-6 col-sm-3 placeholder">
+    	Funcionario com mais agendamentos
+    	<h4>
+			Label
+		</h4>
+		<span class="text-muted">
+		    Something else
+		</span>	
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+    	Funcionario com mais horas vagas
+		<h4>
+			Label
+		</h4>
+		<span class="text-muted">
+		    Something else
+		</span>	
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+    	Total Agendamentos
+		<h4>
+			Label
+		</h4>
+		<span class="text-muted">
+		    Something else
+		</span>	
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+    	Total Minutos Vagos
+		<h4>
+			<%= @funcionario.first.nome%>
+		</h4>
+		<span class="text-muted">
+		    Something else
+		</span>		
+    </div>
+
+</div>
+
+<h2 class="sub-header">
+
+    Agenda Corporativa
+
+</h2>
+
+<div class="table-responsive">
+
+    <table class="table table-striped">
+        <thead>
+        	
+            <tr>
+            	<td><h4></h4></td>
+            	<%@funcionario.each do |f|%>
+            		<td><h5><%= f.nome %></h5></td>
+            	<%end%>	
+            </tr>
+        </thead>
+        <tbody>
+        	<% while @tempo <= "2000-01-01 22:00:00".to_time(:utc)%>
+	        	<tr>
+	        		<td><b><%=@tempo.to_formatted_s(:time)%></b></td>
+	        		<%@funcionario.each do |f|%>
+	        			<% agenda_funcionario(f.id,Date.today,@tempo)%>
+	        			<%if @compromisso.count != 0%>
+	        				<td><%= link_to @compromisso.first.funcionario_servico.servico.descricao, @compromisso.first%></td>
+	        			<%else%>
+	        				<td><%= link_to 'Vago', controller:"agendas",action:"new", funcionario_id: f.id, hr_inicio: @tempo, dt_agendada: Date.today %></td>
+	        			<%end%>
+	        		<%end%>
+	        	</tr>
+	        	<% @tempo = @tempo + 1800%>
+        	<% end%>
+    	</tbody>
+    </table>
+
+</div>

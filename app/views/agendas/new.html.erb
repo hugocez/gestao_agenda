@@ -1,0 +1,30 @@
+<% provide(:title, "Compromisso") %>
+<h1><%="Compromisso"%></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@agenda) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+      <%= f.label :funcionario_servico_id, "Selecione o servico" %>
+      <%= collection_select(:agenda, :funcionario_servico_id, FuncionarioServico.where(["funcionario_id = ?", @agenda.funcionario_id]), :id,:servico_id) %>
+
+	  <%= f.label :funcionario_id, "Funcionario" %>
+      <%= f.text_field :funcionario_id, :disabled => 'disabled', :value =>@agenda.funcionario.nome %>
+      
+      <%= f.label :dt_agendada, "Data Agendada" %>
+      <%= f.text_field :dt_agendada, :disabled => 'disabled' %>
+      
+      <%= f.label :hr_inicio, "Hora Inicio" %>
+      <%= f.text_field :hr_inicio, :disabled => 'disabled', :value => @agenda.hr_inicio.to_formatted_s(:time)%>
+      
+      <%= f.hidden_field :funcionario_id, :value => @agenda.funcionario_id %>
+      <%= f.hidden_field :hr_inicio, :value => @agenda.hr_inicio %>
+      <%= f.hidden_field :dt_agendada, :value => @agenda.dt_agendada %>
+      
+      <%= f.submit "Cadastrar Compromisso", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

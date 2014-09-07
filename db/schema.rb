@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140831195532) do
+ActiveRecord::Schema.define(version: 20140907132917) do
+
+  create_table "agendas", force: true do |t|
+    t.date     "dt_agendada"
+    t.time     "hr_inicio"
+    t.decimal  "valor_final"
+    t.integer  "cliente_id"
+    t.boolean  "fg_finalizado"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "funcionario_id"
+    t.integer  "funcionario_servico_id"
+  end
+
+  add_index "agendas", ["funcionario_id", "dt_agendada", "hr_inicio"], name: "index_for_agendas_on_funcionario_and_hr_inic_and_dt_agendada", unique: true
 
   create_table "empresa_lojas", force: true do |t|
     t.string   "nome"
