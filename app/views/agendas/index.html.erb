@@ -4,53 +4,6 @@
 
 </h1>
 
-<div class="row placeholders">
-
-    <div class="col-xs-6 col-sm-3 placeholder">
-    	Funcionario com mais agendamentos
-    	<h4>
-			Label
-		</h4>
-		<span class="text-muted">
-		    Something else
-		</span>	
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-    	Funcionario com mais horas vagas
-		<h4>
-			Label
-		</h4>
-		<span class="text-muted">
-		    Something else
-		</span>	
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-    	Total Agendamentos
-		<h4>
-			Label
-		</h4>
-		<span class="text-muted">
-		    Something else
-		</span>	
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-    	Total Minutos Vagos
-		<h4>
-			<%= @funcionario.first.nome%>
-		</h4>
-		<span class="text-muted">
-		    Something else
-		</span>		
-    </div>
-
-</div>
-
-<h2 class="sub-header">
-
-    Agenda Corporativa
-
-</h2>
-
 <div class="table-responsive">
 
     <table class="table table-striped">
@@ -59,7 +12,9 @@
             <tr>
             	<td><h4></h4></td>
             	<%@funcionario.each do |f|%>
-            		<td><h5><%= f.nome %></h5></td>
+            		<%if f.funcionario_servicos.count > 0%>
+            			<td><h5><%= f.nome %></h5></td>
+            		<%end%>
             	<%end%>	
             </tr>
         </thead>
@@ -68,12 +23,18 @@
 	        	<tr>
 	        		<td><b><%=@tempo.to_formatted_s(:time)%></b></td>
 	        		<%@funcionario.each do |f|%>
-	        			<% agenda_funcionario(f.id,Date.today,@tempo)%>
-	        			<%if @compromisso.count != 0%>
-	        				<td><%= link_to @compromisso.first.funcionario_servico.servico.descricao, @compromisso.first%></td>
-	        			<%else%>
-	        				<td><%= link_to 'Vago', controller:"agendas",action:"new", funcionario_id: f.id, hr_inicio: @tempo, dt_agendada: Date.today %></td>
-	        			<%end%>
+	        			<%if f.funcionario_servicos.count > 0%>
+	        				<% agenda_funcionario(f.id,Date.today,@tempo)%>
+		        			<%if @compromisso.count != 0%>
+		        				<td><%= link_to @compromisso.first.funcionario_servico.servico.descricao, @compromisso.first%></td>
+		        			<%else%>
+		        				<%if @tempo.to_formatted_s(:time).to_d > Time.now.to_formatted_s(:time).to_d %>
+		        					<td><%= link_to 'Vago', controller:"agendas",action:"new", funcionario_id: f.id, hr_inicio: @tempo, dt_agendada: Date.today %></td>
+		        				<%else%>
+		        					<td>Vago</td>
+		        				<%end%>
+		        			<%end%>
+		        		<%end%>
 	        		<%end%>
 	        	</tr>
 	        	<% @tempo = @tempo + 1800%>

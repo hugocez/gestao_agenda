@@ -37,7 +37,12 @@ class FaixaFuncionarioServicosController < ApplicationController
   end
 
   def index
+    
     @faixa_funcionario_servicos = FaixaFuncionarioServico.where(["funcionario_servico_id = ?", params[:funcionario_servico_id]]).paginate(page: params[:page])
+    if @faixa_funcionario_servicos.count == 0
+      flash[:warning] = "Servico sem Faixas Cadastradas. Favor Cadastrar a Primeira Faixa."
+      redirect_to new_faixa_funcionario_servico_path( :funcionario_servico_id => params[:funcionario_servico_id])  
+    end
   end
   
   def destroy

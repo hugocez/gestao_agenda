@@ -8,7 +8,7 @@
       <%= render 'error_messages'%>
 
       <%= f.label :funcionario_servico_id, "Selecione o servico" %>
-      <%= collection_select(:agenda, :funcionario_servico_id, FuncionarioServico.where(["funcionario_id = ?", @agenda.funcionario_id]), :id,:servico_id) %>
+      <%= collection_select(:agenda, :funcionario_servico_id, Servico.joins(["INNER JOIN funcionario_servicos fs ON fs.servico_id = servicos.id AND fs.funcionario_id = " + @agenda.funcionario.id.to_s]),:id,:descricao) %>
 
 	  <%= f.label :funcionario_id, "Funcionario" %>
       <%= f.text_field :funcionario_id, :disabled => 'disabled', :value =>@agenda.funcionario.nome %>

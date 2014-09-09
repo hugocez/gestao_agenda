@@ -13,7 +13,7 @@ class AgendasController < ApplicationController
   def index
     @agenda = Agenda.all
     @tempo = "2000-01-01 08:00:00".to_time(:utc)
-    @funcionario = Funcionario.where(["empresa_loja_id = ?", current_user.funcionario.empresa_loja_id])
+    @funcionario = Funcionario.includes(:funcionario_servicos).where(["empresa_loja_id = ?", current_user.funcionario.empresa_loja_id])
   end
 
   def edit
@@ -21,6 +21,8 @@ class AgendasController < ApplicationController
   
   def create
     @agenda = Agenda.new(agenda_params)
+    
+    @agenda.funcionario_servico_id = FuncionarioServico.where(["funcionario_id = ? and servico_id = ?", @agenda.funcionario_id, @agenda.funcionario_servico_id]).first.id
         
     if @agenda.save
       flash[:sucess] = "Compromisso Incluido com sucesso!"

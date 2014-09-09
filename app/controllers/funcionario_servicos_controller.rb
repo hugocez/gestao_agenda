@@ -19,7 +19,7 @@ class FuncionarioServicosController < ApplicationController
       
     end
   end
-
+  
   def index
     if params[:funcionario_id] != nil
       @funcionario_servicos = FuncionarioServico.where(["funcionario_id = ?", params[:funcionario_id]]).paginate(page: params[:page]) 

@@ -11,10 +11,10 @@
       <%= f.text_field :dia_semana, :value=> @faixaFuncionarioServico.escreve_dia_semana(@faixaFuncionarioServico.dia_semana), :disabled => 'disabled'%>
 
 	  <%= f.label :hr_inicio, "Hora Inicio" %>
-      <%= f.text_field :hr_inicio, :disabled => 'disabled' %>
+      <%= f.text_field :hr_inicio, :disabled => 'disabled', :value => @faixaFuncionarioServico.hr_inicio.to_formatted_s(:time) %>
       
       <%= f.label :hr_fim, "Hora Fim" %>
-      <%= f.text_field :hr_fim, :disabled => 'disabled' %>
+      <%= f.text_field :hr_fim, :disabled => 'disabled', :value => @faixaFuncionarioServico.hr_fim.to_formatted_s(:time) %>
       
       <%= f.label :valor_base, "Valor Base" %>
       <%= f.text_field :valor_base, :disabled => 'disabled' %>
