@@ -1,0 +1,26 @@
+<% provide(:title, @faixaEmpresaLoja.empresa_loja.empresa.razao_social + " - Faixa") %>
+<h1>Mostrar Faixa - Loja</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@faixaEmpresaLoja) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+      <%= f.label :dia_semana, "Dias da Semana" %>
+      <%= f.text_field :dia_semana, :value=> escreve_dia_semana(@faixaEmpresaLoja.dia_semana), :disabled => 'disabled'%>
+
+	  <%= f.label :hr_inicio, "Hora Inicio" %>
+      <%= f.text_field :hr_inicio, :disabled => 'disabled', :value => @faixaEmpresaLoja.hr_inicio.to_formatted_s(:time) %>
+      
+      <%= f.label :hr_fim, "Hora Fim" %>
+      <%= f.text_field :hr_fim, :disabled => 'disabled', :value => @faixaEmpresaLoja.hr_fim.to_formatted_s(:time) %>
+      
+      <%= f.hidden_field :empresa_loja_id, :value => @faixaEmpresaLoja.empresa_loja_id %>
+
+    <% end %>
+
+  </div>
+</div>
+
+<p><%= link_to 'Atualizar', edit_faixa_empresa_loja_path %> </p>

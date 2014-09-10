@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140907132917) do
+ActiveRecord::Schema.define(version: 20140910005021) do
 
   create_table "agendas", force: true do |t|
     t.date     "dt_agendada"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 20140907132917) do
     t.datetime "updated_at"
     t.string   "email"
   end
+
+  create_table "faixa_empresa_lojas", force: true do |t|
+    t.integer  "empresa_loja_id"
+    t.time     "hr_inicio"
+    t.time     "hr_fim"
+    t.integer  "dia_semana"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "faixa_empresa_lojas", ["dia_semana"], name: "index_faixa_empresa_lojas_on_dia_semana", unique: true
 
   create_table "faixa_funcionario_servicos", force: true do |t|
     t.integer  "funcionario_servico_id"

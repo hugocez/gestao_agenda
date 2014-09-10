@@ -1,0 +1,9 @@
+<tr>
+	  	<td><%= link_to escreve_dia_semana(faixa_empresa_loja.dia_semana), faixa_empresa_loja%></td>
+  		<td><%= link_to faixa_empresa_loja.hr_inicio.to_formatted_s(:time), faixa_empresa_loja %></td>
+  		<td><%= link_to faixa_empresa_loja.hr_fim.to_formatted_s(:time), faixa_empresa_loja %></td>
+  		<td><%= link_to "delete", faixa_empresa_loja, method: :delete,
+                data: { confirm: "You sure?" } %>
+      	</td>
+</tr>
+

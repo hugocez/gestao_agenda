@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :faixa_empresa_lojas
   resources :agendas
   resources :faixa_funcionario_servicos
   resources :funcionario_servicos

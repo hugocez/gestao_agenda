@@ -1,0 +1,25 @@
+<% provide(:title, @faixaEmpresaLoja.empresa_loja.empresa.razao_social + " - Faixa") %>
+<h1>Nova Faixa - Loja</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@faixaEmpresaLoja) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+      <%= f.label :dia_semana, "Dias da Semana" %>
+      <%= f.select :dia_semana, [['Todos',0],['Domingo',1],['Segunda',2],['Terca',3],['Quarta',4],['Quinta',5],['Sexta',6],['Sabado',7]] %>
+
+	  <%= f.label :hr_inicio, "Hora Inicio" %>
+      <%= f.text_field :hr_inicio, :value => @faixaEmpresaLoja.hr_inicio.to_formatted_s(:time) %>
+      
+      <%= f.label :hr_fim, "Hora Fim" %>
+      <%= f.text_field :hr_fim, :value => @faixaEmpresaLoja.hr_fim.to_formatted_s(:time) %>
+      
+      <%= f.hidden_field :empresa_loja_id, :value => @faixaEmpresaLoja.empresa_loja_id %>
+      
+      <%= f.submit "Atualizar Faixa Loja", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

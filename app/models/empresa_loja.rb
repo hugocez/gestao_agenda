@@ -2,6 +2,7 @@ class EmpresaLoja < ActiveRecord::Base
   
   belongs_to :empresa
   has_many :funcionario_empresa_lojas
+  has_many :faixa_empresa_lojas
   
   validates :nome, presence: true
   validates :cep, presence: true, length: {maximum:8}

@@ -1,0 +1,25 @@
+<% provide(:title, 'Lista de Faixas de Horario da Loja') %>
+
+	<h1>Lista de Faixas da Loja</h1>
+	<center><%= will_paginate%></center>
+	
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Dia da Semana</th>
+				<th>Hora Inicio</th>
+				<th>Hora Fim</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<%= render @faixa_empresa_lojas %>
+			
+		</tbody>
+	</table>
+	
+	<center><%= will_paginate%></center>
+	
+
+<p><%= link_to 'Nova Faixa', controller:"faixa_empresa_lojas", action:"new", empresa_loja_id: @faixa_empresa_lojas.first.empresa_loja_id %> </p>
