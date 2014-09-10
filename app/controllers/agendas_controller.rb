@@ -12,7 +12,18 @@ class AgendasController < ApplicationController
 
   def index
     @agenda = Agenda.all
-    @tempo = "2000-01-01 08:00:00".to_time(:utc)
+    horario = FaixaEmpresaLoja.where(["empresa_loja_id = ?", current_user.funcionario.empresa_loja_id])
+    if horario.count == 0
+      @tempo = "2000-01-01 08:00:00".to_time(:utc)
+      @fechamento = "2000-01-01 22:00:00".to_time(:utc)
+    else if horario.count == 1
+        @tempo = horario.first.hr_inicio
+        @fechamento = horario.first.hr_fim
+      else
+        @tempo = horario.where(["dia_semana = ?", Date.today.wday]).hr_inicio
+        @fechamento = horario.where(["dia_semana = ?", Date.today.wday]).hr_fim
+      end 
+    end
     @funcionario = Funcionario.includes(:funcionario_servicos).where(["empresa_loja_id = ?", current_user.funcionario.empresa_loja_id])
   end
 

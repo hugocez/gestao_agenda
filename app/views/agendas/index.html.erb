@@ -1,7 +1,5 @@
 <h1 class="page-header">
-
     Agenda
-
 </h1>
 
 <div class="table-responsive">
@@ -19,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-        	<% while @tempo <= "2000-01-01 22:00:00".to_time(:utc)%>
+        	<% while @tempo <= @fechamento%>
 	        	<tr>
 	        		<td><b><%=@tempo.to_formatted_s(:time)%></b></td>
 	        		<%@funcionario.each do |f|%>
@@ -28,7 +26,7 @@
 		        			<%if @compromisso.count != 0%>
 		        				<td><%= link_to @compromisso.first.funcionario_servico.servico.descricao, @compromisso.first%></td>
 		        			<%else%>
-		        				<%if @tempo.to_formatted_s(:time).to_d > Time.now.to_formatted_s(:time).to_d %>
+		        				<%if @tempo.to_formatted_s(:time).to_f > Time.now.to_formatted_s(:time).to_f %>
 		        					<td><%= link_to 'Vago', controller:"agendas",action:"new", funcionario_id: f.id, hr_inicio: @tempo, dt_agendada: Date.today %></td>
 		        				<%else%>
 		        					<td>Vago</td>
