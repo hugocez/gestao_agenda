@@ -1,0 +1,47 @@
+<% provide(:title, 'Cadastro de Cliente') %>
+<h1>Cadastro de Cliente</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@cliente) do |f| %>
+
+	  <%= render 'error_messages'%>
+
+      <%= f.label :nome %>
+      <%= f.text_field :nome %>
+      
+      <%= f.label :cpf %>
+      <%= f.text_field :cpf %>
+      
+      <%= f.label :data_nasc, "Data Nascimento"%>
+      <%= f.text_field :data_nasc %>
+      
+      <%= f.label :sexo %>
+      <%= f.select :sexo, [['Masculino',0],['Feminino',1]] %>
+
+	  <%= f.label :cep %>
+      <%= f.text_field :cep %>	
+
+	  <%= f.label :logradouro %>
+      <%= f.text_field :logradouro %>	
+
+      <%= f.label :nro_logradouro, 'Numero' %>
+      <%= f.text_field :nro_logradouro %>
+
+	  <%= f.label :compl_logradouro, 'Complemento' %>
+      <%= f.text_field :compl_logradouro %>	
+	
+	  <%= f.label :bairro %>
+      <%= f.text_field :bairro %>
+      
+      <%= f.label :cidade %>
+      <%= f.text_field :cidade %>
+      
+      <%= f.label :uf %>
+      <%= f.text_field :uf %>
+      	
+      <%= f.submit "Incluir", class: "btn btn-large btn-primary"%>
+      
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+
+	<tr>
+	  	<td><%= link_to cliente.id, cliente %></td>
+	  	<td><%= link_to cliente.cpf, cliente %></td>
+  		<td><%= link_to cliente.nome, cliente %></td>
+		<td><%= link_to "delete", cliente, method: :delete,
+                data: { confirm: "You sure?" } %>
+       	</td>
+	</tr>

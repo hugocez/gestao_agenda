@@ -1,4 +1,7 @@
 class AgendasController < ApplicationController
+
+  before_action :signed_in_user
+
   def new
     @agenda = Agenda.new
     @agenda.funcionario_id = params[:funcionario_id]
@@ -47,5 +50,9 @@ class AgendasController < ApplicationController
   
     def agenda_params
       params.require(:agenda).permit(:funcionario_id, :funcionario_servico_id, :hr_inicio, :dt_agendada)
+    end
+    
+    def signed_in_user
+      redirect_to signin_url, notice: "Por favor, faca o login." unless signed_in?
     end
 end

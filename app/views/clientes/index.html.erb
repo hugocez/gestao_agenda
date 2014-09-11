@@ -1,0 +1,22 @@
+<% provide(:title, 'Lista de Clientes') %>
+<h1>Lista de Clientes</h1>
+
+<center><%= will_paginate%></center>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>CPF</th>
+			<th>Nome</th>
+			<th>Deletar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= render @clientes %>
+	</tbody>
+</table>
+
+<center><%= will_paginate%></center>
+
+<p><%= link_to 'Novo Cliente', new_cliente_path %></p>

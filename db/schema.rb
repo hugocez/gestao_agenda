@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910005021) do
+ActiveRecord::Schema.define(version: 20140910223255) do
 
   create_table "agendas", force: true do |t|
     t.date     "dt_agendada"
@@ -26,6 +26,22 @@ ActiveRecord::Schema.define(version: 20140910005021) do
   end
 
   add_index "agendas", ["funcionario_id", "dt_agendada", "hr_inicio"], name: "index_for_agendas_on_funcionario_and_hr_inic_and_dt_agendada", unique: true
+
+  create_table "clientes", force: true do |t|
+    t.string   "nome"
+    t.string   "cpf"
+    t.date     "data_nasc"
+    t.integer  "sexo"
+    t.string   "cep"
+    t.string   "logradouro"
+    t.integer  "nro_logradouro"
+    t.string   "compl_logradouro"
+    t.string   "bairro"
+    t.string   "cidade"
+    t.string   "uf"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "empresa_lojas", force: true do |t|
     t.string   "nome"
