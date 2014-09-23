@@ -1,6 +1,17 @@
 <h1 class="page-header">
-    Agenda
+    Agenda - <%= @data_pesquisa.to_formatted_s(:rfc822) %>
 </h1>
+
+<div class="row">
+		<% form_for (@agendas), method: :get do |f|%>
+		
+			<%= f.label :dt_agendada, "Servico" %>
+      		<%= f.text_field :dt_agendada%>
+      		
+      		<%= f.submit "Cadastrar Compromisso", class: "btn btn-large btn-primary" %>
+		
+		<%end%>
+</div>
 
 <div class="table-responsive">
 
@@ -8,10 +19,10 @@
         <thead>
         	
             <tr>
-            	<td><h4></h4></td>
+            	<td width="10%"><h4></h4></td>
             	<%@funcionario.each do |f|%>
             		<%if f.funcionario_servicos.count > 0%>
-            			<td><h5><%= f.nome %></h5></td>
+            			<td width="<%= 90 / (@funcionario.count) %>%"><h5><%= f.nome %></h5></td>
             		<%end%>
             	<%end%>	
             </tr>
@@ -22,9 +33,9 @@
 	        		<td><b><%=@tempo.to_formatted_s(:time)%></b></td>
 	        		<%@funcionario.each do |f|%>
 	        			<%if f.funcionario_servicos.count > 0%>
-	        				<% agenda_funcionario(f.id,Date.today,@tempo)%>
+	        				<% agenda_funcionario(f.id,@data_pesquisa,@tempo)%>
 		        			<%if @compromisso.count != 0%>
-		        				<td><%= link_to @compromisso.first.funcionario_servico.servico.descricao, @compromisso.first%></td>
+		        				<td><%= link_to @compromisso.first.nome_cliente + " - " + @compromisso.first.funcionario_servico.servico.descricao, @compromisso.first%></td>
 		        			<%else%>
 		        				<%if @tempo.to_formatted_s(:time).to_f > Time.now.to_formatted_s(:time).to_f %>
 		        					<td><%= link_to 'Vago', controller:"agendas",action:"new", funcionario_id: f.id, hr_inicio: @tempo, dt_agendada: Date.today %></td>

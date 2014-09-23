@@ -14,8 +14,17 @@ class AgendasController < ApplicationController
   end
 
   def index
-    @agenda = Agenda.all
+    #@agenda = Agenda.joins(["INNER JOIN funcionarios fs ON fs.id = agendas.funcionario_id AND fs.empresa_id = " + current_user.funcionario.empresa_id.to_s])
+    @agendas = Agenda.all
     horario = FaixaEmpresaLoja.where(["empresa_loja_id = ?", current_user.funcionario.empresa_loja_id])
+    if params[:dt_agendada] == nil
+      dia_semana = Date.today.wday
+      @data_pesquisa = Date.today
+    else
+      dia_semana = params[:dt_agendada].wday
+      @data_pesquisa = params[:dt_agendada]
+    end
+    
     if horario.count == 0
       @tempo = "2000-01-01 08:00:00".to_time(:utc)
       @fechamento = "2000-01-01 22:00:00".to_time(:utc)
@@ -23,14 +32,15 @@ class AgendasController < ApplicationController
         @tempo = horario.first.hr_inicio
         @fechamento = horario.first.hr_fim
       else
-        @tempo = horario.where(["dia_semana = ?", Date.today.wday]).hr_inicio
-        @fechamento = horario.where(["dia_semana = ?", Date.today.wday]).hr_fim
+        @tempo = horario.where(["dia_semana = ?", dia_semana]).hr_inicio
+        @fechamento = horario.where(["dia_semana = ?", dia_semana]).hr_fim
       end 
     end
     @funcionario = Funcionario.includes(:funcionario_servicos).where(["empresa_loja_id = ?", current_user.funcionario.empresa_loja_id])
   end
 
   def edit
+    @agenda = Agenda.find(params[:id])
   end
   
   def create
@@ -49,7 +59,7 @@ class AgendasController < ApplicationController
   private
   
     def agenda_params
-      params.require(:agenda).permit(:funcionario_id, :funcionario_servico_id, :hr_inicio, :dt_agendada)
+      params.require(:agenda).permit(:funcionario_id, :funcionario_servico_id, :hr_inicio, :dt_agendada, :nome_cliente)
     end
     
     def signed_in_user

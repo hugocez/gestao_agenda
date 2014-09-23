@@ -13,6 +13,9 @@
 	  <%= f.label :funcionario_id, "Funcionario" %>
       <%= f.text_field :funcionario_id, :disabled => 'disabled', :value =>@agenda.funcionario.nome %>
       
+      <%= f.label :nome_cliente, "Nome Cliente" %>
+      <%= f.text_field :nome_cliente %>
+      
       <%= f.label :dt_agendada, "Data Agendada" %>
       <%= f.text_field :dt_agendada, :disabled => 'disabled' %>
       

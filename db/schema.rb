@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910223255) do
+ActiveRecord::Schema.define(version: 20140918193103) do
 
   create_table "agendas", force: true do |t|
     t.date     "dt_agendada"
@@ -23,9 +23,17 @@ ActiveRecord::Schema.define(version: 20140910223255) do
     t.datetime "updated_at"
     t.integer  "funcionario_id"
     t.integer  "funcionario_servico_id"
+    t.string   "nome_cliente"
   end
 
   add_index "agendas", ["funcionario_id", "dt_agendada", "hr_inicio"], name: "index_for_agendas_on_funcionario_and_hr_inic_and_dt_agendada", unique: true
+
+  create_table "cliente_empresas", force: true do |t|
+    t.integer  "cliente_id"
+    t.integer  "empresa_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clientes", force: true do |t|
     t.string   "nome"
@@ -41,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140910223255) do
     t.string   "uf"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "empresa_id"
   end
 
   create_table "empresa_lojas", force: true do |t|

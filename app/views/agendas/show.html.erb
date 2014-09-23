@@ -1,2 +1,33 @@
-<h1>Agendas#show</h1>
-<p>Find me in app/views/agendas/show.html.erb</p>
+<% provide(:title, "Compromisso") %>
+<h1><%="Compromisso"%></h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@agenda) do |f| %>
+    
+      <%= render 'error_messages'%>
+
+      <%= f.label :funcionario_servico_id, "Servico" %>
+      <%= f.text_field :funcionario_servico_id, :disabled => 'disabled', :value => @agenda.funcionario_servico.servico.descricao %>
+
+	  <%= f.label :funcionario_id, "Funcionario" %>
+      <%= f.text_field :funcionario_id, :disabled => 'disabled', :value =>@agenda.funcionario.nome %>
+      
+      <%= f.label :nome_cliente, "Nome Cliente" %>
+      <%= f.text_field :nome_cliente, :disabled => 'disabled' %>
+      
+      <%= f.label :dt_agendada, "Data Agendada" %>
+      <%= f.text_field :dt_agendada, :disabled => 'disabled' %>
+      
+      <%= f.label :hr_inicio, "Hora Inicio" %>
+      <%= f.text_field :hr_inicio, :disabled => 'disabled', :value => @agenda.hr_inicio.to_formatted_s(:time)%>
+      
+      <%= f.hidden_field :funcionario_id, :value => @agenda.funcionario_id %>
+      <%= f.hidden_field :hr_inicio, :value => @agenda.hr_inicio %>
+      <%= f.hidden_field :dt_agendada, :value => @agenda.dt_agendada %>
+    <% end %>
+
+  </div>
+</div>
+
+<p><%= link_to 'Finalizar Atendimento', controller:"agendas", action:"edit", id: @agenda.id %> </p>

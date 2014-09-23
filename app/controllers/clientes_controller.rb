@@ -8,6 +8,7 @@ class ClientesController < ApplicationController
 
   def create
     @cliente = Cliente.new(cliente_params)
+    @cliente.empresa = current_user.funcionario.empresa
     if @cliente.save
       flash[:sucess] = "Cliente incluido com sucesso!"
       redirect_to clientes_path
@@ -35,7 +36,7 @@ class ClientesController < ApplicationController
   end
 
   def index
-    @clientes = Cliente.all.paginate(page: params[:page])
+    @clientes = Cliente.where(["empresa_id = ?",current_user.funcionario.empresa_id]).paginate(page: params[:page])
   end
   
   private
