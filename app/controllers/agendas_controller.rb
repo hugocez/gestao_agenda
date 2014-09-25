@@ -21,8 +21,8 @@ class AgendasController < ApplicationController
       dia_semana = Date.today.wday
       @data_pesquisa = Date.today
     else
-      dia_semana = params[:dt_agendada].wday
-      @data_pesquisa = params[:dt_agendada]
+      dia_semana = params[:dt_agendada].to_date.wday
+      @data_pesquisa = params[:dt_agendada].to_date
     end
     
     if horario.count == 0

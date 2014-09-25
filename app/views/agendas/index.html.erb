@@ -3,13 +3,9 @@
 </h1>
 
 <div class="row">
-		<% form_for (@agendas), method: :get do |f|%>
-		
-			<%= f.label :dt_agendada, "Servico" %>
-      		<%= f.text_field :dt_agendada%>
-      		
-      		<%= f.submit "Cadastrar Compromisso", class: "btn btn-large btn-primary" %>
-		
+		<%= form_tag(agendas_path, :method => "get", id: "search_form") do %>
+			<%= text_field_tag :dt_agendada, params[:dt_agendada], placeholder:"Data Agenda"%>
+			<%= submit_tag "Search", :name => nil, :class=>"btn btn-small btn-primary"%>
 		<%end%>
 </div>
 
