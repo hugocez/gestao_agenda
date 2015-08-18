@@ -92,6 +92,4 @@ class FuncionariosController < ApplicationController
       redirect_to signin_url, notice: "Por favor, faca o login." unless signed_in?
     end
     
-    
-  
 end

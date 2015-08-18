@@ -15,22 +15,27 @@
       <%= f.text_field :data_nasc %>
       
       <%= f.label :empresa_loja_id, "Selecione a Loja" %>
-      <%= collection_select(:funcionario, :empresa_loja_id, EmpresaLoja.where(["empresa_id = ?", @funcionario.empresa_id]), :id, :nome) %>
+	  <%= collection_select(:funcionario, :empresa_loja_id, EmpresaLoja.where(["id = ?", @funcionario.empresa_loja_id]), :id, :nome) %>
       
-      <%= fields_for :user, @funcionario.user do |users_form| %>
+	  <%= fields_for :user, @funcionario.user do |users_form| %>
 		<%= users_form.label :email%>
-		<%= users_form.text_field :email %>
+		<% if @funcionario.user %> 
+			<%= users_form.text_field :email, :disabled => 'disabled'  %>
+		<% else %>
+			<%= users_form.text_field :email %>
+		<% end %>
 	  <% end %>
-      
-      <%= fields_for :user, @funcionario.user do |users_form| %>
-		<%= users_form.label :password%>
-		<%= users_form.password_field :password %>
-	  <% end %>
-      
-      <%= fields_for :user, @funcionario.user do |users_form| %>
-		<%= users_form.label :password_confirmation %>
-		<%= users_form.password_field :password_confirmation %>
-	  <% end %>
+      <% if @funcionario.user==nil %>
+			<%= fields_for :user, @funcionario.user do |users_form| %>
+				<%= users_form.label :password%>
+				<%= users_form.password_field :password %>
+			<% end %>
+		  
+			<%= fields_for :user, @funcionario.user do |users_form| %>
+				<%= users_form.label :password_confirmation %>
+				<%= users_form.password_field :password_confirmation %>
+			<% end %>
+	  <% end %>	  
 	  
       <%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
     <% end %>

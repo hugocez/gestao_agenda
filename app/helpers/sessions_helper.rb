@@ -47,8 +47,8 @@ module SessionsHelper
 
   def encontrar_empresa
     user = current_user
-    func = user.funcionario.empresa
-    func.id
+    empresa = user.funcionario.empresa
+    empresa.id
   end
 
   

@@ -20,7 +20,12 @@ class EmpresaLojasController < ApplicationController
 
   def index
     empresa_id = encontrar_empresa
-    @empresa_lojas = EmpresaLoja.where(["empresa_id = ?", empresa_id]).paginate(page: params[:page])
+	user = current_user
+	if user.funcionario.empresa_loja
+		@empresa_lojas = EmpresaLoja.where(["id = ?", user.funcionario.empresa_loja_id]).paginate(page: params[:page])
+	else
+	    @empresa_lojas = EmpresaLoja.where(["empresa_id = ?", empresa_id]).paginate(page: params[:page])
+	end
   end
 
   def show
@@ -28,6 +33,10 @@ class EmpresaLojasController < ApplicationController
   end
 
   def edit
+	@empresaloja = EmpresaLoja.find(params[:id])
+  end
+  
+  def update
   end
   
   private

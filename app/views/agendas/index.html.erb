@@ -3,10 +3,12 @@
 </h1>
 
 <div class="row">
+	<div class="span6 offset3">
 		<%= form_tag(agendas_path, :method => "get", id: "search_form") do %>
 			<%= text_field_tag :dt_agendada, params[:dt_agendada], placeholder:"Data Agenda"%>
-			<%= submit_tag "Search", :name => nil, :class=>"btn btn-small btn-primary"%>
+			<%= submit_tag "Procurar", :name => nil, :class=>"btn btn-small btn-primary"%>
 		<%end%>
+	</div>
 </div>
 
 <div class="table-responsive">
@@ -26,19 +28,38 @@
         <tbody>
         	<% while @tempo <= @fechamento%>
 	        	<tr>
-	        		<td><b><%=@tempo.to_formatted_s(:time)%></b></td>
+	        		<td>
+						<b><%=@tempo.to_formatted_s(:time)%></b>
+					</td>
 	        		<%@funcionario.each do |f|%>
 	        			<%if f.funcionario_servicos.count > 0%>
-	        				<% agenda_funcionario(f.id,@data_pesquisa,@tempo)%>
-		        			<%if @compromisso.count != 0%>
-		        				<td><%= link_to @compromisso.first.nome_cliente + " - " + @compromisso.first.funcionario_servico.servico.descricao, @compromisso.first%></td>
-		        			<%else%>
-		        				<%if @tempo.to_formatted_s(:time).to_f > Time.now.to_formatted_s(:time).to_f %>
-		        					<td><%= link_to 'Vago', controller:"agendas",action:"new", funcionario_id: f.id, hr_inicio: @tempo, dt_agendada: Date.today %></td>
-		        				<%else%>
-		        					<td>Vago</td>
-		        				<%end%>
-		        			<%end%>
+	        				<%funcionario_disponivel(f,@dia_semana + 1,(@tempo + 60).to_formatted_s(:time))%>
+							<%if @disponibilidade == true %>
+								<% agenda_funcionario(f.id,@data_pesquisa,@tempo)%>
+								<%if @compromisso.count != 0%>
+									<td><%= link_to @compromisso.first.nome_cliente + " - " + @compromisso.first.funcionario_servico.servico.descricao, @compromisso.first%></td>
+								<%else%>
+									<%if @data_pesquisa >= Date.today %>
+										<%if @data_pesquisa > Date.today %>
+											<td>
+												<%= link_to "Vago", controller:"agendas",action:"new", funcionario_id: f.id, hr_inicio: @tempo, dt_agendada: @data_pesquisa %>
+											</td>
+										<%else%>
+											<%if @tempo.to_formatted_s(:time).to_f > Time.now.to_formatted_s(:time).to_f %>
+												<td>
+													<%= link_to "Vago", controller:"agendas",action:"new", funcionario_id: f.id, hr_inicio: @tempo, dt_agendada: @data_pesquisa %>
+												</td>
+											<%else%>
+												<td>Vago</td>
+											<%end%>
+										<%end%>
+									<%else%>
+										<td>Vago</td>
+									<%end%>
+								<%end%>
+							<%else%>
+								<td>Indisponivel</td>
+							<%end%>
 		        		<%end%>
 	        		<%end%>
 	        	</tr>

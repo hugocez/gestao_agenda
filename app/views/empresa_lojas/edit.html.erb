@@ -1,2 +1,38 @@
-<h1>EmpresaLojas#edit</h1>
-<p>Find me in app/views/empresa_lojas/edit.html.erb</p>
+<% provide(:title, 'Cadastro de Loja') %>
+<h1>Editar Cadastro de Loja</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@empresaloja) do |f| %>
+
+	  <%= render 'error_messages'%>
+
+      <%= f.label :nome %>
+      <%= f.text_field :nome %>
+
+	  <%= f.label :cep %>
+      <%= f.text_field :cep %>	
+
+	  <%= f.label :logradouro %>
+      <%= f.text_field :logradouro %>	
+
+      <%= f.label :nro_logradouro, 'Numero' %>
+      <%= f.text_field :nro_logradouro %>
+
+	  <%= f.label :compl_logradouro, 'Complemento' %>
+      <%= f.text_field :compl_logradouro %>	
+	
+	  <%= f.label :bairro %>
+      <%= f.text_field :bairro %>
+      
+      <%= f.label :cidade %>
+      <%= f.text_field :cidade %>
+      
+      <%= f.label :uf %>
+      <%= f.text_field :uf %>
+      	
+      <%= f.submit "Alterar", class: "btn btn-large btn-primary"%>
+      
+    <% end %>
+  </div>
+</div>
